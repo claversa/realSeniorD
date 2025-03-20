@@ -20,12 +20,12 @@ export default function HomeScreen() {
     <SafeAreaView>
       <View style={styles.container}>
         <View style={styles.innerContainer}>
-          <Text style={styles.title}>Welcome, NAME!</Text>
+          <Text style={styles.title}>Welcome to Slider!</Text>
           <TouchableOpacity
             style={styles.getstarted}
             onPress={() => navigation.navigate("AppNavigator")}
           >
-            <Text style={styles.greywords}>Get Started</Text>
+            <Text style={styles.greywords}>Get Sliding</Text>
           </TouchableOpacity>
         </View>
         {/* <TouchableOpacity style={styles.button} onPress={() => signOut(auth)}>
