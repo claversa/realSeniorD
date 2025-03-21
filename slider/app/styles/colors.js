@@ -8,7 +8,7 @@ const colors = {
   // success: '#00c853', // Success messages
   white: "#fff", // Utility color
   black: "#000", // Utility color,
-  grey: "#636363",
+  grey: "#2c3252",
 };
 
 export default colors;

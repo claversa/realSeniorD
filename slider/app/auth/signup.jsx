@@ -16,15 +16,16 @@ export default function SignUpScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
-  const [isFocused, setIsFocused] = useState(false);
 
   const handleSignUp = () => {
     if (!email || !password) {
       Alert.alert("Error", "Please fill in both fields");
       return;
     }
-    Alert.alert("Success", `Email: ${email}\nPassword: ${password}`);
-    // navigation.replace("Tabs");
+    // Alert.alert("Success", `Email: ${email}\nPassword: ${password}`);
+    // SAVE THE USERNAME AND PASSWORD TO MONGO
+    // THEN NAVIGATE TO NEXT SECTION
+    navigation.navigate("CreateProfile");
   };
 
   return (
@@ -40,15 +41,11 @@ export default function SignUpScreen() {
             onChangeText={setEmail}
           />
           <TextInput
-            style={[
-              styles.input,
-              { borderBottomColor: isFocused ? colors.yellow : "#f7c972" }, // Change color when focused
-            ]}
+            style={styles.input}
             placeholder="Password"
             secureTextEntry
             value={password}
             onChangeText={setPassword}
-            onFocus={() => setIsFocused(true)}
           />
           <View style={styles.buttonContainer}>
             <TouchableOpacity onPress={handleSignUp}>
@@ -94,7 +91,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
-    color: colors.black,
+    color: colors.grey,
   },
   input: {
     // width: "80%", // Takes 80% of the screen width

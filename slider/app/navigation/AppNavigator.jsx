@@ -4,6 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import TabsNavigator from "./TabsNavigator";
 import LoginScreen from "../auth/login";
 import SignUpScreen from "../auth/signup";
+import ProfileScreen from "../auth/createprofile";
 
 const Stack = createStackNavigator();
 
@@ -58,6 +59,11 @@ function AppNavigator() {
           <Stack.Screen
             name="Signup"
             component={SignUpScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="CreateProfile"
+            component={ProfileScreen}
             options={{ headerShown: false }}
           />
         </>

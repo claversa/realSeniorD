@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
-    color: colors.black,
+    color: colors.grey,
   },
   input: {
     // width: "80%", // Takes 80% of the screen width
