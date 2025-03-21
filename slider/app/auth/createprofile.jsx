@@ -15,7 +15,7 @@ import colors from "../styles/colors";
 import { useNavigation } from "expo-router";
 import Incrementer from "../components/Incrementer";
 
-export default function ProfileScreen() {
+export default function CreateProfileScreen() {
   const navigation = useNavigation();
   const [selectedCuisines, setSelectedCuisines] = useState([]); // Track selected checkboxes
   const [selectedDietary, setSelectedDietary] = useState([]); // Track selected checkboxes
@@ -69,7 +69,7 @@ export default function ProfileScreen() {
       <View style={styles.container}>
         <View style={styles.innerContainer}>
           {/* <Text style={styles.title}>Just a few more details...</Text> */}
-          <Text style={styles.greywords}>Cuisine Preferences</Text>
+          <Text style={styles.sectionTitles}>Cuisine Preferences</Text>
           <View>
             <FlatList
               scrollEnabled={false}
@@ -95,7 +95,7 @@ export default function ProfileScreen() {
             />
           </View>
 
-          <Text style={[styles.greywords, { marginTop: 20 }]}>
+          <Text style={[styles.sectionTitles, { marginTop: 20 }]}>
             Dietary Restrictions
           </Text>
           <View>
@@ -121,7 +121,7 @@ export default function ProfileScreen() {
               )}
             />
           </View>
-          <Text style={[styles.greywords, { marginTop: 20 }]}>
+          <Text style={[styles.sectionTitles, { marginTop: 20 }]}>
             Cooking Frequency
           </Text>
           <View style={styles.cookingFrequency}>
@@ -131,12 +131,17 @@ export default function ProfileScreen() {
             />
             <Text style={styles.label}>time(s) per week</Text>
           </View>
-          {/* <Text style={[styles.greywords, { marginTop: 20 }]}>
+          {/* <Text style={[styles.sectionTitles, { marginTop: 20 }]}>
             Ingredients To Avoid?
           </Text> */}
-          <View style={{ alignItems: "flex-end", marginTop: 20 }}>
+          <View
+            style={{
+              alignItems: "flex-end",
+              marginTop: 20,
+            }}
+          >
             <TouchableOpacity onPress={() => navigation.navigate("Tabs")}>
-              <Text>Register</Text>
+              <Text style={styles.label}>Register</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -168,23 +173,25 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    height: "80%",
+    height: "85%",
     width: "100%",
   },
 
-  greywords: {
+  sectionTitles: {
     color: colors.grey,
     marginTop: 5,
     fontWeight: "bold",
     fontSize: 19,
     marginBottom: 10,
+    fontFamily: "Frank",
   },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-    color: colors.grey,
-  },
+  // title: {
+  //   fontSize: 24,
+  //   fontWeight: "bold",
+  //   marginBottom: 20,
+  //   color: colors.grey,
+  //   fontFamily: "Frank",
+  // },
 
   checkboxContainer: {
     flexDirection: "row",
@@ -201,5 +208,5 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   checked: { backgroundColor: colors.yellow }, // Dark background for selected items
-  label: { fontSize: 16 },
+  label: { fontSize: 16, fontFamily: "Frank", color: colors.grey },
 });

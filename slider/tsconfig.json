@@ -15,6 +15,7 @@
     "app/+not-found.jsx",
     "app/_layout.jsx",
     "app/index.jsx",
-    "app/(tabs)/shopping.jsx"
+    "app/(tabs)/groceries.jsx",
+    "components/ui/IconSymbol.jsx"
   ]
 }

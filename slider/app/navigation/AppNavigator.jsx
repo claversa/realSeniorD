@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import TabsNavigator from "./TabsNavigator";
+// import TabsNavigator from "./TabsNavigator";
 import LoginScreen from "../auth/login";
 import SignUpScreen from "../auth/signup";
-import ProfileScreen from "../auth/createprofile";
+import CreateProfileScreen from "../auth/createprofile";
+import { useNavigation } from "expo-router";
 
 const Stack = createStackNavigator();
 
@@ -43,31 +44,31 @@ function AppNavigator() {
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {user ? (
+      {/* {user ? (
         <Stack.Screen
           name="Tabs"
           component={TabsNavigator}
           options={{ headerShown: false }}
         />
       ) : (
-        <>
-          <Stack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Signup"
-            component={SignUpScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="CreateProfile"
-            component={ProfileScreen}
-            options={{ headerShown: false }}
-          />
-        </>
-      )}
+        <> */}
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Signup"
+        component={SignUpScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CreateProfile"
+        component={CreateProfileScreen}
+        options={{ headerShown: false }}
+      />
+      {/* </>
+      )} */}
     </Stack.Navigator>
   );
 }

@@ -15,6 +15,7 @@ function RootLayoutInner() {
 
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    Frank: require("../assets/fonts/FrankRuhlLibre.ttf"),
   });
 
   useEffect(() => {

@@ -11,6 +11,9 @@ import { name as appName } from "../app.json";
 import HomeScreen from "./HomeScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "expo-router";
+// import TabsNavigator from "./navigation/TabsNavigator";
+import TabLayout from "./(tabs)/_layout";
+import colors from "./styles/colors";
 
 const Stack = createStackNavigator();
 
@@ -42,7 +45,9 @@ const FloatingLogo = () => {
 };
 
 const ScreenWrapper = ({ children }) => (
-  <View style={{ flex: 1 }}>
+  <View
+    style={{ flex: 1, paddingTop: 120, backgroundColor: colors.background }}
+  >
     <FloatingLogo />
     {children}
   </View>
@@ -54,29 +59,24 @@ const App = () => (
       headerShown: false,
     }}
   >
-    <Stack.Screen
-      name="Home"
-      //   component={HomeScreen}
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
+    <Stack.Screen name="Home">
       {() => (
         <ScreenWrapper>
           <HomeScreen />
         </ScreenWrapper>
       )}
     </Stack.Screen>
-    <Stack.Screen
-      name="AppNavigator"
-      //   component={AppNavigator}
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
+    <Stack.Screen name="AppNavigator">
       {() => (
         <ScreenWrapper>
           <AppNavigator />
+        </ScreenWrapper>
+      )}
+    </Stack.Screen>
+    <Stack.Screen name="Tabs">
+      {() => (
+        <ScreenWrapper>
+          <TabLayout />
         </ScreenWrapper>
       )}
     </Stack.Screen>
@@ -87,7 +87,7 @@ AppRegistry.registerComponent(appName, () => App);
 const styles = StyleSheet.create({
   logoContainer: {
     position: "absolute",
-    top: 70,
+    top: 50,
     left: 10,
     zIndex: 10,
   },

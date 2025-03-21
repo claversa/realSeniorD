@@ -1,131 +1,269 @@
-import { StyleSheet, Image, Platform } from "react-native";
+import {
+  StyleSheet,
+  Image,
+  Platform,
+  View,
+  SafeAreaView,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+import { MaterialIcons } from "@expo/vector-icons"; // Import icons from expo
 
-import { Collapsible } from "@/components/Collapsible";
-import { ExternalLink } from "@/components/ExternalLink";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import { IconSymbol } from "@/components/ui/IconSymbol";
+import ramen from "../../assets/images/ramen.jpg";
+import skewers from "../../assets/images/skewers.jpg";
+import smoothie from "../../assets/images/blackberry-power-smoothie.jpg";
+import sandwich from "../../assets/images/brisket-sandwich.jpg";
+import tacos from "../../assets/images/pulled-chicken-tacos.jpg";
+import soup from "../../assets/images/pumpkin-soup.jpg";
+import buddhaBowl from "../../assets/images/shrimp-buddha-bowl.jpg";
+import stirFry from "../../assets/images/stir-fry.jpg";
+import fries from "../../assets/images/sweet-potato-fries.jpg";
+import pancakes from "../../assets/images/vegan-whole-wheat-pancakes.jpg";
+
+import colors from "../styles/colors";
+
+let sampleMeals = [
+  {
+    name: "Vegan Tofu Ramen",
+    id: 1,
+    image: ramen,
+    type: "entree",
+    cuisine: "Japanese",
+  },
+  {
+    name: "Mediterranean Chicken Skewers",
+    id: 2,
+    image: skewers,
+    type: "entree",
+    cuisine: "Mediterranean",
+  },
+  {
+    name: "Blackberry Power Smoothie",
+    id: 3,
+    image: smoothie,
+    type: "breakfast",
+    cuisine: "American",
+  },
+  {
+    name: "Brisket Sandwich",
+    id: 4,
+    image: sandwich,
+    type: "entree",
+    cuisine: "American",
+  },
+  {
+    name: "Pulled Chicken Tacos",
+    id: 5,
+    image: tacos,
+    type: "entree",
+    cuisine: "Mexican",
+  },
+  {
+    name: "Creamy Pumpkin Soup",
+    id: 6,
+    image: soup,
+    type: "side",
+    cuisine: "American",
+  },
+  {
+    name: "Shrimp Buddha Bowl",
+    id: 7,
+    image: buddhaBowl,
+    type: "entree",
+    cuisine: "Asian Fusion",
+  },
+  {
+    name: "Chicken Stir Fry",
+    id: 8,
+    image: stirFry,
+    type: "entree",
+    cuisine: "Chinese",
+  },
+  {
+    name: "Sweet Potato Fries",
+    id: 9,
+    image: fries,
+    type: "side",
+    cuisine: "American",
+  },
+  {
+    name: "Vegan Whole Wheat Pancakes",
+    id: 10,
+    image: pancakes,
+    type: "breakfast",
+    cuisine: "American",
+  },
+];
 
 const MyRecipesScreen = () => {
+  const mealsByType = {
+    breakfast: sampleMeals.filter((meal) => meal.type === "breakfast"),
+    entree: sampleMeals.filter((meal) => meal.type === "entree"),
+    side: sampleMeals.filter((meal) => meal.type === "side"),
+    dessert: sampleMeals.filter((meal) => meal.type === "dessert"),
+    drink: sampleMeals.filter((meal) => meal.type === "drink"),
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }
-    >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>
-        This app includes example code to help you get started.
-      </ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-          and{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{" "}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the
-          web version, press <ThemedText type="defaultSemiBold">w</ThemedText>{" "}
-          in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the{" "}
-          <ThemedText type="defaultSemiBold">@2x</ThemedText> and{" "}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to
-          provide files for different screen densities
-        </ThemedText>
-        <Image
-          source={require("@/assets/images/react-logo.png")}
-          style={{ alignSelf: "center" }}
-        />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText>{" "}
-          to see how to load{" "}
-          <ThemedText style={{ fontFamily: "SpaceMono" }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{" "}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook
-          lets you inspect what the user's current color scheme is, and so you
-          can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{" "}
-          <ThemedText type="defaultSemiBold">
-            components/HelloWave.tsx
-          </ThemedText>{" "}
-          component uses the powerful{" "}
-          <ThemedText type="defaultSemiBold">
-            react-native-reanimated
-          </ThemedText>{" "}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The{" "}
-              <ThemedText type="defaultSemiBold">
-                components/ParallaxScrollView.tsx
-              </ThemedText>{" "}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.container}>
+          {/* Breakfast Section */}
+          <Text style={styles.sectionTitle}>Breakfast</Text>
+          {mealsByType.breakfast.length > 0 && (
+            <View style={styles.section}>
+              {mealsByType.breakfast.map((meal) => (
+                <View key={meal.id} style={styles.mealItem}>
+                  <View style={styles.imageContainer}>
+                    <Image source={meal.image} style={styles.mealImage} />
+                  </View>
+                  <Text style={styles.mealName}>{meal.name}</Text>
+                </View>
+              ))}
+            </View>
+          )}
+          <TouchableOpacity style={{ alignItems: "center", paddingBottom: 10 }}>
+            <MaterialIcons name="add-circle" size={36} color={colors.yellow} />
+          </TouchableOpacity>
+
+          {/* Entrée Section */}
+          <Text style={styles.sectionTitle}>Entrées</Text>
+          {mealsByType.entree.length > 0 && (
+            <View style={styles.section}>
+              {mealsByType.entree.map((meal) => (
+                <View key={meal.id} style={styles.mealItem}>
+                  <View style={styles.imageContainer}>
+                    <Image source={meal.image} style={styles.mealImage} />
+                  </View>
+                  <Text style={styles.mealName}>{meal.name}</Text>
+                </View>
+              ))}
+            </View>
+          )}
+          <TouchableOpacity style={{ alignItems: "center", paddingBottom: 10 }}>
+            <MaterialIcons name="add-circle" size={36} color={colors.yellow} />
+          </TouchableOpacity>
+
+          {/* Side Dishes Section */}
+          <Text style={styles.sectionTitle}>Sides</Text>
+          {mealsByType.side.length > 0 && (
+            <View style={styles.section}>
+              {mealsByType.side.map((meal) => (
+                <View key={meal.id} style={styles.mealItem}>
+                  <View style={styles.imageContainer}>
+                    <Image source={meal.image} style={styles.mealImage} />
+                  </View>
+                  <Text style={styles.mealName}>{meal.name}</Text>
+                </View>
+              ))}
+            </View>
+          )}
+          <TouchableOpacity style={{ alignItems: "center", paddingBottom: 10 }}>
+            <MaterialIcons name="add-circle" size={36} color={colors.yellow} />
+          </TouchableOpacity>
+
+          {/* Dessert Section */}
+          <Text style={styles.sectionTitle}>Desserts</Text>
+          {mealsByType.dessert.length > 0 && (
+            <View style={styles.section}>
+              {mealsByType.dessert.map((meal) => (
+                <View key={meal.id} style={styles.mealItem}>
+                  <View style={styles.imageContainer}>
+                    <Image source={meal.image} style={styles.mealImage} />
+                  </View>
+                  <Text style={styles.mealName}>{meal.name}</Text>
+                </View>
+              ))}
+            </View>
+          )}
+          <TouchableOpacity style={{ alignItems: "center", paddingBottom: 10 }}>
+            <MaterialIcons name="add-circle" size={36} color={colors.yellow} />
+          </TouchableOpacity>
+
+          {/* Drink Section */}
+          <Text style={styles.sectionTitle}>Drinks</Text>
+          {mealsByType.drink.length > 0 && (
+            <View style={styles.section}>
+              {mealsByType.drink.map((meal) => (
+                <View key={meal.id} style={styles.mealItem}>
+                  <View style={styles.imageContainer}>
+                    <Image source={meal.image} style={styles.mealImage} />
+                  </View>
+                  <Text style={styles.mealName}>{meal.name}</Text>
+                </View>
+              ))}
+            </View>
+          )}
+          <TouchableOpacity style={{ alignItems: "center", paddingBottom: 10 }}>
+            <MaterialIcons name="add-circle" size={36} color={colors.yellow} />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: "#808080",
-    bottom: -90,
-    left: -35,
-    position: "absolute",
+  safeArea: {
+    backgroundColor: colors.background,
   },
-  titleContainer: {
-    flexDirection: "row",
-    gap: 8,
+  scrollContainer: {
+    paddingBottom: 16,
+  },
+  container: {
+    backgroundColor: colors.background,
+    padding: 16,
+    paddingBottom: 60,
+  },
+  section: {
+    marginBottom: 20,
+  },
+  sectionTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#fff",
+    marginBottom: 12,
+    textAlign: "left",
+  },
+  mealItem: {
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignItems: "left",
+    overflow: "hidden",
+    backgroundColor: colors.white,
+    borderRadius: 20,
+    backgroundColor: colors.white,
+    borderRadius: 20,
+  },
+  imageContainer: {
+    position: "relative",
+    width: 350,
+    height: 175,
+  },
+  mealImage: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 8,
+  },
+  // mealName: {
+  //   position: "absolute",
+  //   bottom: 0,
+  //   left: 0,
+  //   right: 0,
+  //   textAlign: "left",
+  //   backgroundColor: "rgba(0, 0, 0, 0.5)",
+  //   color: "#fff",
+  //   fontSize: 14,
+  //   paddingVertical: 10,
+  //   paddingLeft: 5,
+  //   fontWeight: "bold",
+  // },
+  mealName: {
+    color: colors.grey,
+    textAlign: "left",
+    marginTop: 10,
   },
 });
-
 export default MyRecipesScreen;

@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
     color: colors.grey,
+    fontFamily: "Frank",
   },
   input: {
     // width: "80%", // Takes 80% of the screen width
@@ -132,6 +133,7 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.yellow,
     marginBottom: 15,
     paddingHorizontal: 10,
+    fontFamily: "Frank",
   },
   buttonContainer: {
     alignItems: "flex-end",
@@ -143,8 +145,14 @@ const styles = StyleSheet.create({
   //   borderRadius: 5,
   //   width: "50%",
   // },
-  buttonText: { color: "white", fontWeight: "bold", textAlign: "center" },
-  link: { justifyContent: "flex-end", color: colors.grey },
-  greywords: { color: colors.grey, marginTop: 5 },
+
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+    fontFamily: "Frank",
+  },
+  link: { justifyContent: "flex-end", color: colors.grey, fontFamily: "Frank" },
+  greywords: { color: colors.grey, marginTop: 5, fontFamily: "Frank" },
   error: { color: "red", marginBottom: 10 },
 });

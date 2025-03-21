@@ -1,59 +1,100 @@
-import { Tabs } from "expo-router";
 import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Platform } from "react-native";
-
-import { HapticTab } from "@/components/HapticTab";
-import { IconSymbol } from "@/components/ui/IconSymbol";
-import TabBarBackground from "@/components/ui/TabBarBackground";
 import { Colors } from "@/constants/Colors";
+import colors from "../styles/colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { MaterialIcons } from "@expo/vector-icons"; // Import icons from expo
+import GroceriesScreen from "./groceries";
+import MyRecipesScreen from "./myrecipes";
+import MealPlanScreen from "./mealplan";
+import ProfileScreen from "./profile";
+import SliderTinderScreen from "./slidertinder";
+
+const Tab = createBottomTabNavigator();
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
-    <Tabs
+    <Tab.Navigator
+      initialRouteName="My Recipes"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: "absolute",
+            position: "absolute", // Transparent effect on iOS
           },
           default: {},
         }),
       }}
     >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="myrecipes"
+      <Tab.Screen
+        name="My Recipes"
+        component={MyRecipesScreen}
         options={{
           title: "My Recipes",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
+          tabBarIcon: ({}) => (
+            <MaterialIcons name="book" size={24} color={colors.grey} />
           ),
+          tabBarLabelStyle: {
+            color: colors.grey,
+          },
         }}
       />
-      <Tabs.Screen
-        name="shopping"
+      <Tab.Screen
+        name="Groceries"
+        component={GroceriesScreen}
         options={{
-          title: "Shopping",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="paperplane.fill" color={color} />
+          title: "Groceries",
+          tabBarIcon: ({}) => (
+            <MaterialIcons name="shopping-cart" size={24} color={colors.grey} />
           ),
+          tabBarLabelStyle: {
+            color: colors.grey,
+          },
         }}
       />
-    </Tabs>
+      <Tab.Screen
+        name="Slider Tinder"
+        component={SliderTinderScreen}
+        options={{
+          title: "Slider",
+          tabBarIcon: ({}) => (
+            <MaterialIcons name="lunch-dining" size={30} color={colors.grey} />
+          ),
+          tabBarLabelStyle: {
+            color: colors.grey,
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Meal Plan"
+        component={MealPlanScreen}
+        options={{
+          title: "Meal Plan",
+          tabBarIcon: ({}) => (
+            <MaterialIcons name="view-list" size={24} color={colors.grey} />
+          ),
+          tabBarLabelStyle: {
+            color: colors.grey,
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          title: "Profile",
+          tabBarIcon: ({}) => (
+            <MaterialIcons name="person" size={24} color={colors.grey} />
+          ),
+          tabBarLabelStyle: {
+            color: colors.grey,
+          },
+        }}
+      />
+    </Tab.Navigator>
   );
 }
