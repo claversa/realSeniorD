@@ -1,130 +1,224 @@
-import { StyleSheet, Image, Platform } from "react-native";
-
+import {
+  StyleSheet,
+  Image,
+  ScrollView,
+  View,
+  Text,
+  SafeAreaView,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
+import colors from "../styles/colors";
+import { useState } from "react";
 import { Collapsible } from "@/components/Collapsible";
-import { ExternalLink } from "@/components/ExternalLink";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import { IconSymbol } from "@/components/ui/IconSymbol";
+import dogProfile from "../../assets/images/dogProfile.jpg";
 
 const ProfileScreen = () => {
+  const [selectedCuisines, setSelectedCuisines] = useState([]);
+  const [selectedDietary, setSelectedDietary] = useState([]);
+  const [selectedBlockedIngredient, setSelectedBlockedIngredient] = useState(
+    []
+  );
+  const cookingFrequency = 3;
+  const name = "Caroline";
+  const email = "caroline.laversa@gmail.com";
+
+  const cuisines = [
+    "American",
+    "African",
+    "Asian",
+    "European",
+    "Indian",
+    "Italian",
+    "Mediterranean",
+    "Mexican",
+    "Middle Eastern",
+  ];
+
+  const dietaryRestrictions = [
+    "Dairy",
+    "Eggs",
+    "Gluten",
+    "Halal",
+    "Kosher",
+    "Nuts",
+    "Shellfish",
+    "Soy",
+    "Vegan",
+    "Vegetarian",
+  ];
+
+  const blockedIngredients = [
+    "Bean",
+    "Cilantro",
+    "Tomato",
+    "Broccoli",
+    "Onion",
+  ];
+
+  const toggleSelection = (id, state, setState) => {
+    setState((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }
-    >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>
-        This app includes example code to help you get started.
-      </ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-          and{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{" "}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the
-          web version, press <ThemedText type="defaultSemiBold">w</ThemedText>{" "}
-          in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the{" "}
-          <ThemedText type="defaultSemiBold">@2x</ThemedText> and{" "}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to
-          provide files for different screen densities
-        </ThemedText>
-        <Image
-          source={require("@/assets/images/react-logo.png")}
-          style={{ alignSelf: "center" }}
-        />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText>{" "}
-          to see how to load{" "}
-          <ThemedText style={{ fontFamily: "SpaceMono" }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{" "}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook
-          lets you inspect what the user's current color scheme is, and so you
-          can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{" "}
-          <ThemedText type="defaultSemiBold">
-            components/HelloWave.tsx
-          </ThemedText>{" "}
-          component uses the powerful{" "}
-          <ThemedText type="defaultSemiBold">
-            react-native-reanimated
-          </ThemedText>{" "}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The{" "}
-              <ThemedText type="defaultSemiBold">
-                components/ParallaxScrollView.tsx
-              </ThemedText>{" "}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <View style={styles.profileHeader}>
+          <Image source={dogProfile} style={styles.profileImage} />
+          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.email}>{email}</Text>
+        </View>
+        <View style={styles.collapseContainer}>
+          <View style={styles.sections}>
+            <Collapsible title="Cuisine Preferences">
+              <FlatList
+                data={cuisines}
+                keyExtractor={(item) => item}
+                numColumns={2}
+                scrollEnabled={false}
+                columnWrapperStyle={{ justifyContent: "space-between" }}
+                // columnWrapperStyle={styles.columnWrapper}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={styles.checkboxContainer}
+                    onPress={() =>
+                      toggleSelection(
+                        item,
+                        selectedCuisines,
+                        setSelectedCuisines
+                      )
+                    }
+                  >
+                    <View
+                      style={[
+                        styles.checkbox,
+                        selectedCuisines.includes(item) && styles.checked,
+                      ]}
+                    />
+                    <Text style={styles.label}>{item}</Text>
+                  </TouchableOpacity>
+                )}
+              />
+            </Collapsible>
+          </View>
+          <View style={styles.sections}>
+            <Collapsible title="Dietary Restrictions">
+              <FlatList
+                data={dietaryRestrictions}
+                keyExtractor={(item) => item}
+                numColumns={2}
+                scrollEnabled={false}
+                columnWrapperStyle={{ justifyContent: "space-between" }}
+                // columnWrapperStyle={styles.columnWrapper}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={styles.checkboxContainer}
+                    onPress={() =>
+                      toggleSelection(item, selectedDietary, setSelectedDietary)
+                    }
+                  >
+                    <View
+                      style={[
+                        styles.checkbox,
+                        selectedDietary.includes(item) && styles.checked,
+                      ]}
+                    />
+                    <Text style={styles.label}>{item}</Text>
+                  </TouchableOpacity>
+                )}
+              />
+            </Collapsible>
+          </View>
+          <Collapsible title="Blocked Ingredients">
+            <FlatList
+              data={blockedIngredients}
+              keyExtractor={(item) => item}
+              numColumns={2}
+              scrollEnabled={false}
+              // columnWrapperStyle={styles.columnWrapper}
+              columnWrapperStyle={{ justifyContent: "space-between" }}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={styles.checkboxContainer}
+                  onPress={() =>
+                    toggleSelection(
+                      item,
+                      selectedBlockedIngredient,
+                      setSelectedBlockedIngredient
+                    )
+                  }
+                >
+                  <View
+                    style={[
+                      styles.checkbox,
+                      selectedBlockedIngredient.includes(item) &&
+                        styles.checked,
+                    ]}
+                  />
+                  <Text style={styles.label}>{item}</Text>
+                </TouchableOpacity>
+              )}
+            />
+          </Collapsible>
+
+          <Text style={styles.sectionTitle}>
+            Cooking Frequency: {cookingFrequency} day
+            {cookingFrequency > 1 ? "s" : ""} per week
+          </Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: "#808080",
-    bottom: -90,
-    left: -35,
-    position: "absolute",
+  container: { flex: 1, backgroundColor: colors.background },
+  profileHeader: { alignItems: "center", padding: 20 },
+  profileImage: {
+    width: 150,
+    height: 150,
+    borderRadius: 100,
+    marginBottom: 10,
   },
-  titleContainer: {
+  name: { fontSize: 22, fontWeight: "bold", color: colors.white },
+  email: { fontSize: 14, color: colors.white, marginBottom: 10 },
+  // columnWrapper: { justifyContent: "space-between" },
+  checkboxContainer: {
     flexDirection: "row",
-    gap: 8,
+    flex: 1,
+    alignItems: "center",
+    marginBottom: 10,
+    marginTop: 6,
+    // paddingLeft: 5,
+  },
+  sections: {
+    marginBottom: 10,
+  },
+  collapseContainer: {
+    backgroundColor: colors.white,
+    padding: 20,
+    borderRadius: 20,
+    marginBottom: 60,
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderWidth: 2,
+    borderColor: "#333",
+    borderRadius: 4,
+    marginRight: 10,
+  },
+  checked: { backgroundColor: colors.yellow },
+  label: { fontSize: 16, color: colors.black },
+  sectionTitle: {
+    textAlign: "left",
+    fontSize: 16,
+    fontWeight: "semibold",
+    marginVertical: 20,
+    color: colors.black,
   },
 });
 

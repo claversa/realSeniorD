@@ -19,6 +19,9 @@ export default function CreateProfileScreen() {
   const navigation = useNavigation();
   const [selectedCuisines, setSelectedCuisines] = useState([]); // Track selected checkboxes
   const [selectedDietary, setSelectedDietary] = useState([]); // Track selected checkboxes
+  const [selectedBlockedIngredient, setSelectedBlockedIngredient] = useState(
+    []
+  ); // Track selected checkboxes
   const [cookingFrequency, setCookingFrequency] = useState(0);
 
   const cuisines = [
@@ -65,6 +68,15 @@ export default function CreateProfileScreen() {
   };
   const toggleDietary = (id) => {
     setSelectedDietary(
+      (prevSelected) =>
+        prevSelected.includes(id)
+          ? prevSelected.filter((item) => item !== id) // Remove if already selected
+          : [...prevSelected, id] // Add if not selected);
+    );
+  };
+
+  const toggleBlockedIngredient = (id) => {
+    setSelectedBlockedIngredient(
       (prevSelected) =>
         prevSelected.includes(id)
           ? prevSelected.filter((item) => item !== id) // Remove if already selected
@@ -147,12 +159,13 @@ export default function CreateProfileScreen() {
                 renderItem={({ item }) => (
                   <TouchableOpacity
                     style={[styles.checkboxContainer, { flex: 1 }]}
-                    onPress={() => toggleDietary(item.id)}
+                    onPress={() => toggleBlockedIngredient(item.id)}
                   >
                     <View
                       style={[
                         styles.checkbox,
-                        selectedDietary.includes(item.id) && styles.checked,
+                        selectedBlockedIngredient.includes(item.id) &&
+                          styles.checked,
                       ]}
                     />
                     <Text style={styles.label}>{item.label}</Text>
