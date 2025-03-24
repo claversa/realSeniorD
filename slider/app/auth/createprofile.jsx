@@ -46,6 +46,14 @@ export default function CreateProfileScreen() {
     { id: "Vegetarian", label: "Vegetarian" },
   ];
 
+  const blockedIngredients = [
+    { id: "Bean", label: "Bean" },
+    { id: "Cilantro", label: "Cilantro" },
+    { id: "Tomato", label: "Tomato" },
+    { id: "Broccoli", label: "Broccoli" },
+    { id: "Onion", label: "Onion" },
+  ];
+
   // Toggle selection when a checkbox is clicked
   const toggleCuisine = (id) => {
     setSelectedCuisines(
@@ -65,85 +73,117 @@ export default function CreateProfileScreen() {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.innerContainer}>
-          {/* <Text style={styles.title}>Just a few more details...</Text> */}
-          <Text style={styles.sectionTitles}>Cuisine Preferences</Text>
-          <View>
-            <FlatList
-              scrollEnabled={false}
-              data={cuisines}
-              keyExtractor={(cuisine) => cuisine.id}
-              numColumns={2}
-              columnWrapperStyle={{ justifyContent: "space-between" }}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  style={[styles.checkboxContainer, { flex: 1 }]}
-                  onPress={() => toggleCuisine(item.id)}
-                >
-                  <View
-                    style={[
-                      styles.checkbox,
-                      selectedCuisines.includes(item.id, "cuisine") &&
-                        styles.checked,
-                    ]}
-                  />
-                  <Text style={styles.label}>{item.label}</Text>
-                </TouchableOpacity>
-              )}
-            />
-          </View>
+          <ScrollView
+            style={styles.scroll}
+            showsVerticalScrollIndicator={false}
+          >
+            {/* <Text style={styles.title}>Just a few more details...</Text> */}
+            <TextInput placeholder="Name" style={styles.input} />
+            <Text style={styles.sectionTitles}>Cuisine Preferences</Text>
+            <View>
+              <FlatList
+                scrollEnabled={false}
+                data={cuisines}
+                keyExtractor={(cuisine) => cuisine.id}
+                numColumns={2}
+                columnWrapperStyle={{ justifyContent: "space-between" }}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={[styles.checkboxContainer, { flex: 1 }]}
+                    onPress={() => toggleCuisine(item.id)}
+                  >
+                    <View
+                      style={[
+                        styles.checkbox,
+                        selectedCuisines.includes(item.id, "cuisine") &&
+                          styles.checked,
+                      ]}
+                    />
+                    <Text style={styles.label}>{item.label}</Text>
+                  </TouchableOpacity>
+                )}
+              />
+            </View>
 
-          <Text style={[styles.sectionTitles, { marginTop: 20 }]}>
-            Dietary Restrictions
-          </Text>
-          <View>
-            <FlatList
-              scrollEnabled={false}
-              data={dietaryRestrictions}
-              keyExtractor={(dietary) => dietary.id}
-              numColumns={2}
-              columnWrapperStyle={{ justifyContent: "space-between" }}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  style={[styles.checkboxContainer, { flex: 1 }]}
-                  onPress={() => toggleDietary(item.id)}
-                >
-                  <View
-                    style={[
-                      styles.checkbox,
-                      selectedDietary.includes(item.id) && styles.checked,
-                    ]}
-                  />
-                  <Text style={styles.label}>{item.label}</Text>
-                </TouchableOpacity>
-              )}
-            />
-          </View>
-          <Text style={[styles.sectionTitles, { marginTop: 20 }]}>
-            Cooking Frequency
-          </Text>
-          <View style={styles.cookingFrequency}>
-            <Incrementer
-              value={cookingFrequency}
-              onChange={setCookingFrequency}
-            />
-            <Text style={styles.label}>time(s) per week</Text>
-          </View>
-          {/* <Text style={[styles.sectionTitles, { marginTop: 20 }]}>
+            <Text style={[styles.sectionTitles, { marginTop: 20 }]}>
+              Dietary Restrictions
+            </Text>
+            <View>
+              <FlatList
+                scrollEnabled={false}
+                data={dietaryRestrictions}
+                keyExtractor={(dietary) => dietary.id}
+                numColumns={2}
+                columnWrapperStyle={{ justifyContent: "space-between" }}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={[styles.checkboxContainer, { flex: 1 }]}
+                    onPress={() => toggleDietary(item.id)}
+                  >
+                    <View
+                      style={[
+                        styles.checkbox,
+                        selectedDietary.includes(item.id) && styles.checked,
+                      ]}
+                    />
+                    <Text style={styles.label}>{item.label}</Text>
+                  </TouchableOpacity>
+                )}
+              />
+            </View>
+            <Text style={[styles.sectionTitles, { marginTop: 20 }]}>
+              Block Ingredients
+            </Text>
+            <View>
+              <FlatList
+                scrollEnabled={false}
+                data={blockedIngredients}
+                keyExtractor={(dietary) => dietary.id}
+                numColumns={2}
+                columnWrapperStyle={{ justifyContent: "space-between" }}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={[styles.checkboxContainer, { flex: 1 }]}
+                    onPress={() => toggleDietary(item.id)}
+                  >
+                    <View
+                      style={[
+                        styles.checkbox,
+                        selectedDietary.includes(item.id) && styles.checked,
+                      ]}
+                    />
+                    <Text style={styles.label}>{item.label}</Text>
+                  </TouchableOpacity>
+                )}
+              />
+            </View>
+            <Text style={[styles.sectionTitles, { marginTop: 20 }]}>
+              Cooking Frequency
+            </Text>
+            <View style={styles.cookingFrequency}>
+              <Incrementer
+                value={cookingFrequency}
+                onChange={setCookingFrequency}
+              />
+              <Text style={styles.label}>time(s) per week</Text>
+            </View>
+            {/* <Text style={[styles.sectionTitles, { marginTop: 20 }]}>
             Ingredients To Avoid?
           </Text> */}
-          <View
-            style={{
-              alignItems: "flex-end",
-              marginTop: 20,
-            }}
-          >
-            <TouchableOpacity onPress={() => navigation.navigate("Tabs")}>
-              <Text style={styles.label}>Register</Text>
-            </TouchableOpacity>
-          </View>
+            <View
+              style={{
+                alignItems: "flex-end",
+                marginTop: 20,
+              }}
+            >
+              <TouchableOpacity onPress={() => navigation.navigate("Tabs")}>
+                <Text style={styles.label}>Register</Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
         </View>
       </View>
     </SafeAreaView>
@@ -176,7 +216,31 @@ const styles = StyleSheet.create({
     height: "85%",
     width: "100%",
   },
-
+  scroll: {
+    flexGrow: 1,
+    backgroundColor: colors.white,
+    // paddingBottom: 20,
+    // paddingLeft: 50,
+    // paddingRight: 50,
+    // paddingTop: 30,
+    // borderTopLeftRadius: 20,
+    // borderTopRightRadius: 20,
+    // height: "85%",
+    // width: "100%",
+  },
+  input: {
+    // width: "80%", // Takes 80% of the screen width
+    height: 50,
+    // borderColor: colors.black,
+    // borderWidth: 1,
+    // borderRadius: 5,
+    borderBottomWidth: 2,
+    borderBottomColor: colors.yellow,
+    marginBottom: 15,
+    paddingHorizontal: 10,
+    fontFamily: "Frank",
+    fontSize: 19,
+  },
   sectionTitles: {
     color: colors.grey,
     marginTop: 5,
